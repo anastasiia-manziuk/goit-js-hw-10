@@ -44,11 +44,17 @@ function convertMs(ms) {
 
 console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+console.log(convertMs(24140000)); // {days: 0, hours: 6, minutes: 42, seconds: 20}
 
 
 
 let userSelectedDate;
+
+const days = document.querySelector('[data-days]');
+const hours = document.querySelector('[data-hours]');
+const minutes = document.querySelector('[data-minutes]');
+const seconds = document.querySelector('[data-seconds]');
+
 const button = document.querySelector('[data-start]');
 button.disabled = true;
 
@@ -66,6 +72,8 @@ flatpickr('#datetime-picker', {
     }
 });
 
+
+
 button.addEventListener('click', () => {
     if (userSelectedDate > new Date()) {
         button.disabled = true;
@@ -76,10 +84,10 @@ button.addEventListener('click', () => {
 
             if (ms <= 0) {
             clearInterval(timer);
-            document.querySelector('[data-days]').textContent = '00';
-            document.querySelector('[data-hours]').textContent = '00';
-            document.querySelector('[data-minutes]').textContent = '00';
-            document.querySelector('[data-seconds]').textContent = '00';
+            days.textContent = '00';
+            hours.textContent = '00';
+            minutes.textContent = '00';
+            seconds.textContent = '00';
 
             
 
@@ -89,10 +97,10 @@ button.addEventListener('click', () => {
             
             const time = convertMs(ms);
 
-            document.querySelector('[data-days]').textContent = String(time.days).padStart(2, '0')
-            document.querySelector('[data-hours]').textContent = String(time.hours).padStart(2, '0')
-            document.querySelector('[data-minutes]').textContent = String(time.minutes).padStart(2, '0')
-            document.querySelector('[data-seconds]').textContent = String(time.seconds).padStart(2,'0')
+            days.textContent = String(time.days).padStart(2, '0')
+            hours.textContent = String(time.hours).padStart(2, '0')
+            minutes.textContent = String(time.minutes).padStart(2, '0')
+            seconds.textContent = String(time.seconds).padStart(2,'0')
 
         }, 1000);
 
